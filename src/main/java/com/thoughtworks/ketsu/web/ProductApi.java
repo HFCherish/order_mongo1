@@ -4,6 +4,7 @@ import com.thoughtworks.ketsu.domain.product.Product;
 import com.thoughtworks.ketsu.domain.product.ProductRepository;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 import com.thoughtworks.ketsu.web.validators.FieldNotNullValidator;
+import org.bson.types.ObjectId;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -33,14 +34,15 @@ public class ProductApi {
         return Response.created(routes.productUrl(product.get_id())).build();
     }
 
-//    @GET
-//    @Path("{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Product getOne(@PathParam("id") String id) {
-//        return productRepository.findById(id)
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Product getOne(@PathParam("id") String id) {
+//        return productRepository.findById(new ObjectId(id))
 //                .map(product -> product)
 //                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
-//    }
+        return new Product();
+    }
 //
 //    @GET
 //    @Produces(MediaType.APPLICATION_JSON)

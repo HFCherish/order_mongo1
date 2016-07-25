@@ -14,13 +14,6 @@ public class Product implements Record{
     private String description;
     private double price;
 
-    public Product(ObjectId _id, String name, String description, double price) {
-        this._id = _id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-    }
-
     public ObjectId get_id() {
         return _id;
     }
@@ -40,11 +33,11 @@ public class Product implements Record{
     @Override
     public Map<String, Object> toRefJson(Routes routes) {
         return new HashMap<String, Object>() {{
-            put("_id", get_id().toString());
-            put("uri", routes.productUrl(get_id()));
-            put("name", getName());
-            put("description", getDescription());
-            put("price", getPrice());
+//            put("_id", get_id().toString());
+//            put("uri", routes.productUrl(get_id()));
+//            put("name", getName());
+//            put("description", getDescription());
+//            put("price", getPrice());
         }};
     }
 
