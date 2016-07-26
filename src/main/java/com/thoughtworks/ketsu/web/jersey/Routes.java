@@ -21,7 +21,7 @@ public class Routes {
         return URI.create(baseUri + "users/" + id);
     }
 
-    public URI orderUrl(long userId, long orderId) {
+    public URI orderUrl(String userId, String orderId) {
         return URI.create(baseUri + "users/" + userId + "/orders/" + orderId);
     }
 
