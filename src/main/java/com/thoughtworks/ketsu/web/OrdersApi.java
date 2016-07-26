@@ -21,6 +21,7 @@ public class OrdersApi {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response buildOrder(Map orderInfo,
                                @Context Routes routes) {
+        user.placeOrder(orderInfo);
         return Response.created(routes.orderUrl(user.get_id(), "")).build();
     }
 }
