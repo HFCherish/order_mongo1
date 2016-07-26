@@ -10,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -42,10 +43,11 @@ public class ProductApi {
                 .map(product -> product)
                 .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
     }
-//
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<Product> getAll() {
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> getAll() {
 //        return productRepository.findAll();
-//    }
+        return new ArrayList<>();
+    }
 }

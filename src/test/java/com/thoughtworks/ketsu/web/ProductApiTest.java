@@ -85,16 +85,16 @@ public class ProductApiTest extends ApiSupport {
         assertThat(response.getStatus(), is(404));
 
     }
-//
-//    @Test
-//    public void should_get_all_products() {
-//        Product product = prepareProduct(productRepository);
-//
-//        Response response = get(productBaseUrl);
-//
-//        assertThat(response.getStatus(), is(200));
+
+    @Test
+    public void should_get_all_products() {
+        Product product = prepareProduct(productRepository);
+
+        Response response = get(productBaseUrl);
+
+        assertThat(response.getStatus(), is(200));
 //        List prods = response.readEntity(List.class);
 //        assertThat(prods.size(), is(1));
 //        verifyProductInfo(product, (Map)prods.get(0));
-//    }
+    }
 }
