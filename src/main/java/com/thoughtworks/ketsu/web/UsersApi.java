@@ -30,8 +30,7 @@ public class UsersApi {
                 put("message", "name can not be empty and must composed of letters and numbers");
             }}).build();
         }
-        userRepository.save(info);
-        return Response.created(routes.userUrl(new ObjectId())).build();
+        return Response.created(routes.userUrl(userRepository.save(info).get_id())).build();
     }
 
 //    @Path("{userId}")

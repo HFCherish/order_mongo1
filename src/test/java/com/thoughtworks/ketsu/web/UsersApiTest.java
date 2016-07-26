@@ -24,6 +24,7 @@ public class UsersApiTest extends ApiSupport {
 
         assertThat(response.getStatus(), is(201));
         assertThat(response.getLocation().toString(), containsString(usersBaseUrl));
+        assertThat(response.getLocation().toString().matches(".*users/.*$"), is(true));
     }
 
     @Test
