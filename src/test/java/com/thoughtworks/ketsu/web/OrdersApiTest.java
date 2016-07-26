@@ -6,6 +6,7 @@ import com.thoughtworks.ketsu.domain.users.User;
 import com.thoughtworks.ketsu.domain.users.UserRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +46,7 @@ public class OrdersApiTest extends ApiSupport {
 
     @Test
     public void should_create_order() {
-        Response response = post(orderBaseUrl, orderJsonForTest(product));
+        Response response = post(orderBaseUrl, orderJsonForTest(product.get_id().toString()));
 
         assertThat(response.getStatus(), is(201));
         assertThat(response.getLocation().toString(), containsString(orderBaseUrl));
@@ -55,9 +56,19 @@ public class OrdersApiTest extends ApiSupport {
 
     @Test
     public void should_400_when_create_with_invalid_basic_info() {
-        Map<String, Object> info = orderJsonForTest(product);
+        Map<String, Object> info = orderJsonForTest(product.get_id().toString());
         //name empty
         info.remove("name");
+
+        Response response = post(orderBaseUrl, info);
+
+        assertThat(response.getStatus(), is(400));
+
+    }
+
+    @Test
+    public void should_400_when_create_given_invalid_order_item_info() {
+        Map<String, Object> info = orderJsonForTest(new ObjectId().toString());
 
         Response response = post(orderBaseUrl, info);
 

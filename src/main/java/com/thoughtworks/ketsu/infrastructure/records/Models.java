@@ -15,6 +15,7 @@ import com.thoughtworks.ketsu.infrastructure.mongo.mappers.ProductMapper;
 import com.thoughtworks.ketsu.infrastructure.mongo.mappers.UserMapper;
 import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepositoryImpl;
 import com.thoughtworks.ketsu.infrastructure.repositories.UserRepositoryImpl;
+import com.thoughtworks.ketsu.web.validators.OrderValidator;
 
 import java.net.UnknownHostException;
 import java.util.Properties;
@@ -75,6 +76,7 @@ public class Models extends AbstractModule {
         bind(UserRepository.class).to(UserRepositoryImpl.class);
         bind(UserMapper.class).to(UserDao.class);
         bind(OrderMapper.class).to(OrderDao.class);
+        bind(OrderValidator.class);
     }
 //
 //    private void bindPersistence() {

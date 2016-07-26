@@ -26,13 +26,13 @@ public class TestHelper {
         }};
     }
 
-    public static Map<String, Object> orderJsonForTest(Product product) {
+    public static Map<String, Object> orderJsonForTest(String prodId) {
         return new HashMap<String, Object>() {{
             put("name", USER_NAME);
             put("address", "beijing");
             put("phone", "68790");
             put("order_items", Arrays.asList(new HashMap() {{
-                put("product_id", product.get_id().toString());
+                put("product_id", prodId);
                 put("quantity", 2);
             }}));
         }};
