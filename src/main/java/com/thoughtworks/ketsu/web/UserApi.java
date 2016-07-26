@@ -16,7 +16,7 @@ public class UserApi {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getUser() {
-        return "";
+    public User getUser() {
+        return user;
     }
 }

@@ -18,7 +18,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findById(ObjectId id) {
+    public Optional<User> findById(String id) {
         return Optional.ofNullable(userMapper.findById(id));
     }
 }

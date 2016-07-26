@@ -28,8 +28,8 @@ public class UserDao implements UserMapper {
     }
 
     @Override
-    public User findById(ObjectId id) {
-        DBObject user = userCollection.findOne(new BasicDBObject("_id", id));
+    public User findById(String id) {
+        DBObject user = userCollection.findOne(new BasicDBObject("_id", new ObjectId(id)));
 
         return user == null ? null : new User(user);
     }

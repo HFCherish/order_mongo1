@@ -17,7 +17,7 @@ public class Routes {
         return URI.create(baseUri + "products/" + id);
     }
 
-    public URI userUrl(ObjectId id) {
+    public URI userUrl(String id) {
         return URI.create(baseUri + "users/" + id);
     }
 

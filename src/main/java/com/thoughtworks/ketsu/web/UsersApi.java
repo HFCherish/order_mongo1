@@ -33,9 +33,8 @@ public class UsersApi {
 
     @Path("{userId}")
     public UserApi getUser(@PathParam("userId") String userId) {
-//        return userRepository.findById(userId)
-//                .map(UserApi::new)
-//                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
-        return new UserApi(null);
+        return userRepository.findById(userId)
+                .map(UserApi::new)
+                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
     }
 }
