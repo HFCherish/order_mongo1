@@ -21,7 +21,8 @@ public class OrderDao implements OrderMapper {
     }
 
     @Override
-    public Order save(Map orderInfo) {
+    public Order save(Map orderInfo, String userId) {
+        orderInfo.put("user_id", userId);
         orderCollection.insert(new BasicDBObject(orderInfo));
         return new Order(orderCollection.findOne());
     }

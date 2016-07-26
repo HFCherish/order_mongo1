@@ -46,7 +46,7 @@ public class User implements Record{
     }
 
     public Order placeOrder(Map orderInfo) {
-        return orderMapper.save(orderInfo);
+        return orderMapper.save(orderInfo, get_id());
     }
 
     public Optional<Order> findOrderById(String id) {
