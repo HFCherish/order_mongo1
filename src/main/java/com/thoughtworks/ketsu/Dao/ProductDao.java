@@ -1,6 +1,9 @@
 package com.thoughtworks.ketsu.Dao;
 
-import com.mongodb.*;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import com.thoughtworks.ketsu.domain.product.Product;
 import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.ProductMapper;
 import org.bson.types.ObjectId;
@@ -10,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
-
-import static com.thoughtworks.ketsu.util.AppUtils.fromDBObject;
 
 public class ProductDao implements ProductMapper {
 
@@ -27,8 +28,6 @@ public class ProductDao implements ProductMapper {
     @Override
     public Product save(final Map prodToCreate) {
         BasicDBObject prodDBObject = new BasicDBObject(prodToCreate);
-//        BasicDBObject prodDBObject = new BasicDBObject();
-//        prodDBObject.put("name", prodToCreate.)
         prodsCollection.insert(prodDBObject);
         logger.info("Added new product{}", prodToCreate);
 

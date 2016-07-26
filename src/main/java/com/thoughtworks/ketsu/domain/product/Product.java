@@ -5,7 +5,6 @@ import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 import org.bson.types.ObjectId;
 
-import javax.xml.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
