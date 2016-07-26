@@ -10,7 +10,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,7 @@ public class ProductApi {
     public Response create(Map prodInfo,
                            @Context Routes routes) {
         Map<String, List> nullFields = new FieldNotNullValidator().getNullFields(Arrays.asList("name", "description", "price"), prodInfo);
-        if(nullFields.get("items").size() > 0) {
+        if(nullFields != null) {
             return Response.status(Response.Status.BAD_REQUEST).entity(nullFields).build();
         }
 

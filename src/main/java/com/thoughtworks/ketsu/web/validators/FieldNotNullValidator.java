@@ -17,6 +17,7 @@ public class FieldNotNullValidator {
                     put("message", toValidate + " can not be empty.");
                 }});
         }
+        if( nullFields.size() == 0 ) return null;
         return new HashMap<String, List>() {{
             put("items", nullFields);
         }};
