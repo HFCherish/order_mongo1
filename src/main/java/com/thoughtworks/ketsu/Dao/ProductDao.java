@@ -7,25 +7,32 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
-import static com.thoughtworks.ketsu.Dao.BasicDao.getDB;
 import static com.thoughtworks.ketsu.util.AppUtils.fromDBObject;
 
 public class ProductDao implements ProductMapper {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductDao.class);
 
-    private DBCollection prodsCollection = getDB().getCollection("products");
+    private static final Logger logger = LoggerFactory.getLogger(ProductDao.class);
+    private DBCollection prodsCollection;
+
+    @Inject
+    public ProductDao(DB db) {
+        prodsCollection = db.getCollection("products");
+    }
 
     @Override
     public Product save(final Map prodToCreate) {
         BasicDBObject prodDBObject = new BasicDBObject(prodToCreate);
+//        BasicDBObject prodDBObject = new BasicDBObject();
+//        prodDBObject.put("name", prodToCreate.)
         prodsCollection.insert(prodDBObject);
         logger.info("Added new product{}", prodToCreate);
 
-        ObjectId id = (ObjectId)prodDBObject.get(("_id"));
+        ObjectId id = (ObjectId) prodDBObject.get("_id");
         return findById(id);
     }
 
@@ -35,9 +42,7 @@ public class ProductDao implements ProductMapper {
         DBObject prod = prodsCollection.findOne(query);
 
         if(prod != null) {
-            Product product = (Product) fromDBObject(prod, Product.class);
-
-            return product;
+            return new Product(prod);
         }
         return null;
     }

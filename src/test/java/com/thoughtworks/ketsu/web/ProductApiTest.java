@@ -4,6 +4,7 @@ import com.thoughtworks.ketsu.domain.product.Product;
 import com.thoughtworks.ketsu.domain.product.ProductRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
+import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -55,17 +56,18 @@ public class ProductApiTest extends ApiSupport {
     @Test
     public void should_get_some_product() {
         Product product = prepareProduct(productRepository);
+        System.out.println("**********@@@@@@@@@@@@@@@"+product.get_id());
         String getOneUrl = productBaseUrl + "/" + product.get_id();
 
         Response response = get(getOneUrl);
 
         assertThat(response.getStatus(), is(200));
-//        Map info = response.readEntity(Map.class);
-//        verifyProductInfo(product, info);
+        Map info = response.readEntity(Map.class);
+        verifyProductInfo(product, info);
     }
 
     private void verifyProductInfo(Product product, Map info) {
-        assertThat(Long.valueOf(info.get("id").toString()), is(product.get_id()));
+        assertThat(info.get("id").toString(), is(product.get_id().toString()));
         assertThat(info.get("uri").toString(), containsString(productBaseUrl + "/" + product.get_id()));
         assertThat(info.get("name"), is(product.getName()));
         assertThat((double)info.get("price"), is(product.getPrice()));

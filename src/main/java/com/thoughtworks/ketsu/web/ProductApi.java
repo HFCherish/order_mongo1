@@ -38,10 +38,9 @@ public class ProductApi {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Product getOne(@PathParam("id") String id) {
-//        return productRepository.findById(new ObjectId(id))
-//                .map(product -> product)
-//                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
-        return new Product();
+        return productRepository.findById(new ObjectId(id))
+                .map(product -> product)
+                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
     }
 //
 //    @GET

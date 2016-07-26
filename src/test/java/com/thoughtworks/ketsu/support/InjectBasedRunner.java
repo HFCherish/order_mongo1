@@ -7,6 +7,9 @@ import com.google.inject.Provider;
 import com.google.inject.name.Names;
 import com.google.inject.spi.Message;
 import com.google.inject.util.Modules;
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.thoughtworks.ketsu.infrastructure.records.Models;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.internal.inject.Injections;
@@ -20,6 +23,7 @@ import org.junit.runners.model.InitializationError;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 
 import javax.inject.Inject;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -60,18 +64,17 @@ public abstract class InjectBasedRunner extends BlockJUnit4ClassRunner {
 
     private List<AbstractModule> getAbstractModules() {
         Properties properties = new Properties();
-        String dbname = System.getenv().getOrDefault("DB_NAME", "newketsu");
-        String host = System.getenv().getOrDefault("DB_HOST", "localhost");
-        String port = System.getenv().getOrDefault("DB_PORT", "3307");
-        String username = System.getenv().getOrDefault("DB_USERNAME", "mysql");
-        String password = System.getenv().getOrDefault("DB_PASSWORD", "mysql");
+        String dbname = System.getenv().getOrDefault("MONGODB_DATABASE", "mongodb_store");
+        String host = System.getenv().getOrDefault("MONGODB_HOST", "localhost");
+        String port = System.getenv().getOrDefault("MONGODB_PORT", "27017");
+        String username = System.getenv().getOrDefault("MONGODB_USER", "admin");
+        String password = System.getenv().getOrDefault("MONGODB_PASS", "mypass");
         String connectURL = String.format(
-                "jdbc:mysql://%s:%s/%s?user=%s&password=%s&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull",
-                host,
-                port,
-                dbname,
+                "mongodb://%s:%s@%s/%s",
                 username,
-                password
+                password,
+                host,
+                dbname
         );
         properties.setProperty("db.url", connectURL);
         List<AbstractModule> modules = new ArrayList<>(asList(new AbstractModule[]{
