@@ -1,5 +1,6 @@
 package com.thoughtworks.ketsu.web;
 
+import com.thoughtworks.ketsu.domain.users.UserRepository;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 import org.bson.types.ObjectId;
 
@@ -15,8 +16,8 @@ import java.util.Map;
 
 @Path("users")
 public class UsersApi {
-//    @Context
-//    UserRepository userRepository;
+    @Context
+    UserRepository userRepository;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -29,6 +30,7 @@ public class UsersApi {
                 put("message", "name can not be empty and must composed of letters and numbers");
             }}).build();
         }
+        userRepository.save(info);
         return Response.created(routes.userUrl(new ObjectId())).build();
     }
 

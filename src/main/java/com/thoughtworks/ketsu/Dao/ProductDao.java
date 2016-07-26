@@ -2,7 +2,7 @@ package com.thoughtworks.ketsu.Dao;
 
 import com.mongodb.*;
 import com.thoughtworks.ketsu.domain.product.Product;
-import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.ProductMapper;
+import com.thoughtworks.ketsu.infrastructure.mongo.mappers.ProductMapper;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

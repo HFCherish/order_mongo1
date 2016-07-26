@@ -2,7 +2,7 @@ package com.thoughtworks.ketsu.infrastructure.repositories;
 
 import com.thoughtworks.ketsu.domain.product.Product;
 import com.thoughtworks.ketsu.domain.product.ProductRepository;
-import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.ProductMapper;
+import com.thoughtworks.ketsu.infrastructure.mongo.mappers.ProductMapper;
 import org.bson.types.ObjectId;
 
 import javax.inject.Inject;
