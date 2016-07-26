@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 
 import static com.thoughtworks.ketsu.support.TestHelper.USER_NAME;
 import static com.thoughtworks.ketsu.support.TestHelper.userJsonForTest;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -21,6 +22,6 @@ public class UsersApiTest extends ApiSupport {
         Response response = post(usersBaseUrl, userJsonForTest(USER_NAME));
 
         assertThat(response.getStatus(), is(201));
-
+        assertThat(response.getLocation().toString(), containsString(usersBaseUrl));
     }
 }

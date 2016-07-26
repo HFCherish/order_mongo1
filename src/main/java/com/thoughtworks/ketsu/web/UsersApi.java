@@ -1,6 +1,7 @@
 package com.thoughtworks.ketsu.web;
 
 import com.thoughtworks.ketsu.web.jersey.Routes;
+import org.bson.types.ObjectId;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -9,7 +10,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
 import java.util.Map;
 
 @Path("users")
@@ -29,8 +29,7 @@ public class UsersApi {
 //                put("message", "name can not be empty and must composed of letters and numbers");
 //            }}).build();
 //        }
-//        return Response.created(routes.userUrl(userRepository.save(info).getId())).build();
-        return Response.created(URI.create("")).build();
+        return Response.created(routes.userUrl(new ObjectId())).build();
     }
 
 //    @Path("{userId}")
