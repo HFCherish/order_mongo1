@@ -1,5 +1,6 @@
 package com.thoughtworks.ketsu.Dao;
 
+import com.google.inject.Injector;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -16,6 +17,9 @@ public class UserDao implements UserMapper {
     private final DBCollection userCollection;
 
     @Inject
+    Injector injector;
+
+    @Inject
     public UserDao(DB db) {
         userCollection = db.getCollection("users");
     }
@@ -24,13 +28,20 @@ public class UserDao implements UserMapper {
     @Override
     public User save(Map info) {
         userCollection.insert(new BasicDBObject(info));
-        return new User(userCollection.findOne());
+
+        User user = new User(userCollection.findOne());
+        injector.injectMembers(user);
+        return user;
     }
 
     @Override
     public User findById(String id) {
         DBObject user = userCollection.findOne(new BasicDBObject("_id", new ObjectId(id)));
-
-        return user == null ? null : new User(user);
+        if(user != null) {
+            User user1 = new User(user);
+            injector.injectMembers(user1);
+            return user1;
+        }
+        return null;
     }
 }

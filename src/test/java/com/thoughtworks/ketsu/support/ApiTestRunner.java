@@ -42,6 +42,8 @@ public class ApiTestRunner extends InjectBasedRunner {
 //                statement.close();
 //                connection.commit();
                     db.getCollection("products").remove(new BasicDBObject());
+                    db.getCollection("users").remove(new BasicDBObject());
+                    db.getCollection("orders").remove(new BasicDBObject());
             }
         }
     };

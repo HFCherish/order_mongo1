@@ -7,9 +7,6 @@ import com.google.inject.Provider;
 import com.google.inject.name.Names;
 import com.google.inject.spi.Message;
 import com.google.inject.util.Modules;
-import com.mongodb.DB;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 import com.thoughtworks.ketsu.infrastructure.records.Models;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.internal.inject.Injections;
@@ -23,7 +20,6 @@ import org.junit.runners.model.InitializationError;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 
 import javax.inject.Inject;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

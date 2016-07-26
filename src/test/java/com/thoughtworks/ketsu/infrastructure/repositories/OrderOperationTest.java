@@ -6,6 +6,7 @@ import com.thoughtworks.ketsu.domain.users.Order;
 import com.thoughtworks.ketsu.domain.users.User;
 import com.thoughtworks.ketsu.domain.users.UserRepository;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
+import com.thoughtworks.ketsu.support.DatabaseTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,7 @@ import static com.thoughtworks.ketsu.support.TestHelper.prepareUser;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-@RunWith(ApiTestRunner.class)
+@RunWith(DatabaseTestRunner.class)
 public class OrderOperationTest {
     @Inject
     UserRepository userRepository;
@@ -39,9 +40,9 @@ public class OrderOperationTest {
     @Test
     public void should_save_and_get_order() {
         Order order = user.placeOrder(orderJsonForTest(product));
-        Optional<Order> fetched = user.findOrderById("");
+        Optional<Order> fetched = user.findOrderById(order.getId());
 
         assertThat(fetched.isPresent(), is(true));
-
+        assertThat(fetched.get().getId(), is(order.getId()));
     }
 }

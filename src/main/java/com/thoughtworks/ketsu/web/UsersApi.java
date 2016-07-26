@@ -1,9 +1,7 @@
 package com.thoughtworks.ketsu.web;
 
-import com.thoughtworks.ketsu.domain.users.User;
 import com.thoughtworks.ketsu.domain.users.UserRepository;
 import com.thoughtworks.ketsu.web.jersey.Routes;
-import org.bson.types.ObjectId;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;

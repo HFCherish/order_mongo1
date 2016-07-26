@@ -27,6 +27,7 @@ public class OrdersApiTest extends ApiSupport {
 
     @Inject
     ProductRepository productRepository;
+
     private User user;
     private Product product;
     private String orderBaseUrl;

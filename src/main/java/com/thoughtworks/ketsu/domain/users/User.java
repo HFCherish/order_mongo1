@@ -1,9 +1,11 @@
 package com.thoughtworks.ketsu.domain.users;
 
 import com.mongodb.DBObject;
+import com.thoughtworks.ketsu.infrastructure.mongo.mappers.OrderMapper;
 import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -12,6 +14,10 @@ public class User implements Record{
     private String _id;
     private String name;
 
+    @Inject
+    OrderMapper orderMapper;
+
+    @Inject
     public User(DBObject object) {
         this._id = object.get("_id").toString();
         this.name = object.get("name").toString();
@@ -40,10 +46,10 @@ public class User implements Record{
     }
 
     public Order placeOrder(Map orderInfo) {
-        return null;
+        return orderMapper.save(orderInfo);
     }
 
     public Optional<Order> findOrderById(String id) {
-        return Optional.ofNullable(new Order());
+        return Optional.ofNullable(orderMapper.findById(id));
     }
 }

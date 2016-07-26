@@ -1,6 +1,8 @@
 package com.thoughtworks.ketsu.support;
 
 import com.google.inject.AbstractModule;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
 import org.apache.ibatis.session.SqlSessionManager;
 import org.junit.rules.TestRule;
 import org.junit.runners.model.InitializationError;
@@ -15,6 +17,9 @@ import static java.util.Arrays.asList;
 public class DatabaseTestRunner extends InjectBasedRunner {
 //    @Inject
 //    private SqlSessionManager sqlSessionManager;
+
+    @Inject
+    DB db;
 
     public DatabaseTestRunner(final Class<?> clazz) throws InitializationError {
         super(clazz);
@@ -32,16 +37,13 @@ public class DatabaseTestRunner extends InjectBasedRunner {
     private final TestRule rollbackSessionManager = (base, description) -> new Statement() {
         @Override
         public void evaluate() throws Throwable {
-//            sqlSessionManager.startManagedSession();
-//            try {
-//                base.evaluate();
-//            } finally {
-//                try {
-//                    sqlSessionManager.rollback(true);
-//                } finally {
-//                    sqlSessionManager.close();
-//                }
-//            }
+            try {
+                base.evaluate();
+            } finally {
+                db.getCollection("products").remove(new BasicDBObject());
+                db.getCollection("users").remove(new BasicDBObject());
+                db.getCollection("orders").remove(new BasicDBObject());
+            }
         }
     };
 
