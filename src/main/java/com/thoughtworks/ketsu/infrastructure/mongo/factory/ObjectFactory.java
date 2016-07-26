@@ -1,4 +1,4 @@
-package com.thoughtworks.ketsu.infrastructure.mybatis.factory;
+package com.thoughtworks.ketsu.infrastructure.mongo.factory;
 
 import com.google.inject.Injector;
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;

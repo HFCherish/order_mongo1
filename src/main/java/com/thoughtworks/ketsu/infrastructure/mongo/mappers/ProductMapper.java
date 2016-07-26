@@ -1,4 +1,4 @@
-package com.thoughtworks.ketsu.infrastructure.mybatis.mappers;
+package com.thoughtworks.ketsu.infrastructure.mongo.mappers;
 
 import com.thoughtworks.ketsu.domain.product.Product;
 import org.bson.types.ObjectId;

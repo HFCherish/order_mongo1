@@ -1,4 +1,4 @@
-package com.thoughtworks.ketsu.infrastructure.mybatis.handlers;
+package com.thoughtworks.ketsu.infrastructure.mongo.handlers;
 
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
