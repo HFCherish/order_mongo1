@@ -1,9 +1,6 @@
 package com.thoughtworks.ketsu.Dao;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
+import com.mongodb.*;
 import com.thoughtworks.ketsu.domain.product.Product;
 import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.ProductMapper;
 import org.bson.types.ObjectId;
@@ -11,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,8 +29,9 @@ public class ProductDao implements ProductMapper {
         prodsCollection.insert(prodDBObject);
         logger.info("Added new product{}", prodToCreate);
 
-        ObjectId id = (ObjectId) prodDBObject.get("_id");
-        return findById(id);
+//        ObjectId id = (ObjectId) prodDBObject.get("_id");
+//        return findById(id);
+        return new Product(prodsCollection.findOne());
     }
 
     @Override
@@ -49,23 +48,14 @@ public class ProductDao implements ProductMapper {
 
     @Override
     public List<Product> findAll() {
-        return null;
+        List<Product> prods = new ArrayList<>();
+
+        DBCursor dbObjects = prodsCollection.find();
+        while (dbObjects.hasNext() ) {
+            prods.add(new Product(dbObjects.next()));
+        }
+
+        return prods;
     }
-
-
-//    public Optional<Book> readByIsbn(@Nonnull final String isbn) {
-//        checkNotNull(isbn, "Argument[isbn] must not be null");
-//
-//        DBObject query = new BasicDBObject("isbn", isbn);
-//        DBObject dbObject = booksCollection.findOne(query);
-//
-//        if (dbObject != null) {
-//            Book book = (Book) AppUtils.fromDBObject(dbObject, Book.class);
-//            logger.info("Retrieved book for isbn[{}]:{}", isbn, book);
-//            return Optional.of(book);
-//        }
-//        logger.info("Book with isbn[{}] does not exist", isbn);
-//        return Optional.empty();
-//    }
 
 }

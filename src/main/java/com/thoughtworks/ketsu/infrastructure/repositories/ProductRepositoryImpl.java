@@ -6,6 +6,7 @@ import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.ProductMapper;
 import org.bson.types.ObjectId;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,8 +24,8 @@ public class ProductRepositoryImpl implements ProductRepository {
         return Optional.ofNullable(productMapper.findById(id));
     }
 
-//    @Override
-//    public List<Product> findAll() {
-//        return productMapper.findAll();
-//    }
+    @Override
+    public List<Product> findAll() {
+        return productMapper.findAll();
+    }
 }

@@ -93,8 +93,8 @@ public class ProductApiTest extends ApiSupport {
         Response response = get(productBaseUrl);
 
         assertThat(response.getStatus(), is(200));
-//        List prods = response.readEntity(List.class);
-//        assertThat(prods.size(), is(1));
-//        verifyProductInfo(product, (Map)prods.get(0));
+        List prods = response.readEntity(List.class);
+        assertThat(prods.size(), is(1));
+        verifyProductInfo(product, (Map)prods.get(0));
     }
 }
