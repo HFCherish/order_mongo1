@@ -37,7 +37,7 @@ public class ProductApiTest extends ApiSupport {
 
         assertThat(response.getStatus(), is(201));
         assertThat(response.getLocation().toString(), containsString(productBaseUrl));
-        assertThat(response.getLocation().toString().matches(".*/products/.*$"), is(true));
+        assertThat(response.getLocation().toString().matches(".*/[a-zA-Z\\d]+$"), is(true));
     }
 
     @Test
