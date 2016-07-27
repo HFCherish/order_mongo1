@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Order implements Record{
+public class Order implements Record {
     private String id;
     private String userId;
     private String name;
@@ -58,6 +58,7 @@ public class Order implements Record{
             put("name", getName());
             put("address", getAddress());
             put("phone", getPhone());
+            put("total_price", getTotalPrice());
             put("created_at", getCreatedAt().toString());
             put("order_items", getOrderItems().stream().map(item -> item.toJson(routes)).collect(Collectors.toList()));
         }};
@@ -70,5 +71,12 @@ public class Order implements Record{
 
     public Date getCreatedAt() {
         return new ObjectId(getId()).getDate();
+    }
+
+    public double getTotalPrice() {
+        double total = 0;
+        for (OrderItem item : orderItems)
+            total += item.getAmount() * item.getQuantity();
+        return total;
     }
 }
