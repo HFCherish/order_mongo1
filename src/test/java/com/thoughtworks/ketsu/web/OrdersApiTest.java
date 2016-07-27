@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.thoughtworks.ketsu.support.TestHelper.*;
@@ -90,5 +91,7 @@ public class OrdersApiTest extends ApiSupport {
         assertThat(orderInfo.get("phone"), is(order.getPhone()));
         assertThat(orderInfo.get("created_at").toString(), is(order.getCreatedAt().toString()));
 
+        List<Map> items = (List)orderInfo.get("order_items");
+        assertThat(items.size(), is(1));
     }
 }

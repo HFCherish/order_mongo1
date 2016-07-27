@@ -30,6 +30,7 @@ public class OrderDao implements OrderMapper {
     @Override
     public Order findById(String id) {
         DBObject orderObject = orderCollection.findOne(new BasicDBObject("_id", new ObjectId(id)));
+        System.out.println("******************"+orderObject);
         return orderObject == null ? null : new Order(orderObject);
     }
 }

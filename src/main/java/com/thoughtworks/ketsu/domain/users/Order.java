@@ -4,12 +4,8 @@ import com.mongodb.DBObject;
 import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 import org.bson.types.ObjectId;
-import org.joda.time.DateTime;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Order implements Record{
     private String id;
@@ -25,6 +21,11 @@ public class Order implements Record{
         this.name = object.get("name").toString();
         this.address = object.get("address").toString();
         this.phone = object.get("phone").toString();
+        orderItems = new ArrayList<>();
+        List<Map> items = (List)object.get("order_items");
+        for(Map item: items) {
+            orderItems.add(new OrderItem(item));
+        }
     }
 
     public String getUserId() {
@@ -53,13 +54,18 @@ public class Order implements Record{
 
     @Override
     public Map<String, Object> toRefJson(Routes routes) {
+        List<Map> items = new ArrayList<>();
+        for(OrderItem item: getOrderItems()) {
+            items.add(item.toJson(routes));
+        }
+
         return new HashMap() {{
             put("uri", routes.orderUrl(getUserId(), getId()));
             put("name", getName());
             put("address", getAddress());
             put("phone", getPhone());
             put("created_at", getCreatedAt().toString());
-
+            put("order_items", items);
         }};
     }
 
