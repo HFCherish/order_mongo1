@@ -1,9 +1,6 @@
 package com.thoughtworks.ketsu.Dao;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
+import com.mongodb.*;
 import com.thoughtworks.ketsu.domain.users.Order;
 import com.thoughtworks.ketsu.domain.users.OrderItem;
 import com.thoughtworks.ketsu.infrastructure.mongo.mappers.OrderMapper;
@@ -42,6 +39,16 @@ public class OrderDao implements OrderMapper {
     public Order findById(String id) {
         DBObject orderObject = orderCollection.findOne(new BasicDBObject("_id", new ObjectId(id)));
         return orderObject == null ? null : buildOrder(orderObject);
+    }
+
+    @Override
+    public List<Order> findAllOf(String userId) {
+        DBCursor orderObjects = orderCollection.find(new BasicDBObject("user_id", userId));
+        List<Order> orders = new ArrayList<>();
+        while(orderObjects.hasNext()) {
+            orders.add(buildOrder(orderObjects.next()));
+        }
+        return orders;
     }
 
 

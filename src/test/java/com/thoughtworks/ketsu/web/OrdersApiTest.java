@@ -109,9 +109,13 @@ public class OrdersApiTest extends ApiSupport {
 
     @Test
     public void should_get_all_orders() {
+        Order order = prepareOrder(user, product);
+
         Response response = get(orderBaseUrl);
 
         assertThat(response.getStatus(), is(200));
+//        List<Map> fetchedOrders = response.readEntity(List.class);
+//        assertThat(fetchedOrders.size(), is(1));
 
     }
 }
