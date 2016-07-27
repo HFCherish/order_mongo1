@@ -17,9 +17,9 @@ public class User implements Record{
     @Inject
     OrderMapper orderMapper;
 
-    public User(DBObject object) {
-        this._id = object.get("_id").toString();
-        this.name = object.get("name").toString();
+    public User(String _id, String name) {
+        this._id = _id;
+        this.name = name;
     }
 
     public String get_id() {

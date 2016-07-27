@@ -15,11 +15,11 @@ public class Product implements Record{
     private String description;
     private double price;
 
-    public Product(DBObject object) {
-        this._id = (ObjectId) object.get("_id");
-        this.name = object.get("name").toString();
-        this.description = object.get("description").toString();
-        this.price = (double)object.get("price");
+    public Product(ObjectId _id, String name, String description, double price) {
+        this._id = _id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
     }
 
     //    @XmlTransient

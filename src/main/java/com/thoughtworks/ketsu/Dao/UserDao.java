@@ -29,7 +29,7 @@ public class UserDao implements UserMapper {
     public User save(Map info) {
         userCollection.insert(new BasicDBObject(info));
 
-        User user = new User(userCollection.findOne());
+        User user = buildUser(userCollection.findOne());
         injector.injectMembers(user);
         return user;
     }
@@ -37,11 +37,16 @@ public class UserDao implements UserMapper {
     @Override
     public User findById(String id) {
         DBObject user = userCollection.findOne(new BasicDBObject("_id", new ObjectId(id)));
-        if(user != null) {
-            User user1 = new User(user);
+        if (user != null) {
+            User user1 = buildUser(user);
             injector.injectMembers(user1);
             return user1;
         }
         return null;
+    }
+
+    private User buildUser(DBObject object) {
+        return new User(object.get("_id").toString(),
+                object.get("name").toString());
     }
 }

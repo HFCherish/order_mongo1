@@ -29,7 +29,7 @@ public class ProductDao implements ProductMapper {
         prodsCollection.insert(prodDBObject);
         logger.info("Added new product{}", prodToCreate);
 
-        return new Product(prodsCollection.findOne());
+        return buildProduct(prodsCollection.findOne());
     }
 
     @Override
@@ -37,8 +37,8 @@ public class ProductDao implements ProductMapper {
         DBObject query = new BasicDBObject("_id", id);
         DBObject prod = prodsCollection.findOne(query);
 
-        if(prod != null) {
-            return new Product(prod);
+        if (prod != null) {
+            return buildProduct(prod);
         }
         return null;
     }
@@ -49,11 +49,17 @@ public class ProductDao implements ProductMapper {
         List<Product> prods = new ArrayList<>();
 
         DBCursor dbObjects = prodsCollection.find();
-        while (dbObjects.hasNext() ) {
-            prods.add(new Product(dbObjects.next()));
+        while (dbObjects.hasNext()) {
+            prods.add(buildProduct(dbObjects.next()));
         }
 
         return prods;
     }
 
+    private Product buildProduct(DBObject object) {
+        return new Product((ObjectId) object.get("_id"),
+                object.get("name").toString(),
+                object.get("description").toString(),
+                (double) object.get("price"));
+    }
 }
