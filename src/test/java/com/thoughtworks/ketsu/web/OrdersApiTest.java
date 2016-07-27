@@ -20,6 +20,7 @@ import java.util.Map;
 
 import static com.thoughtworks.ketsu.support.TestHelper.*;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -120,6 +121,6 @@ public class OrdersApiTest extends ApiSupport {
         List<Map> fetchedOrders = response.readEntity(List.class);
         assertThat(fetchedOrders.size(), is(1));
         verifyBasicOrderInfo(order, fetchedOrders.get(0));
-
+//        assertThat(fetchedOrders.get(0).get("order_items"), is(nullValue()));
     }
 }

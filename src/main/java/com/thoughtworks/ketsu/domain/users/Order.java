@@ -60,13 +60,14 @@ public class Order implements Record {
             put("phone", getPhone());
             put("total_price", getTotalPrice());
             put("created_at", getCreatedAt().toString());
-            put("order_items", getOrderItems().stream().map(item -> item.toJson(routes)).collect(Collectors.toList()));
         }};
     }
 
     @Override
     public Map<String, Object> toJson(Routes routes) {
-        return toRefJson(routes);
+        Map<String, Object> resMap = toRefJson(routes);
+        resMap.put("order_items", getOrderItems().stream().map(item -> item.toJson(routes)).collect(Collectors.toList()));
+        return resMap;
     }
 
     public Date getCreatedAt() {

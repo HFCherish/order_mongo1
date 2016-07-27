@@ -2,6 +2,7 @@ package com.thoughtworks.ketsu.domain.users;
 
 import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
+import org.bson.types.ObjectId;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +36,7 @@ public class OrderItem implements Record {
             put("product_id", getProdId());
             put("quantity", getQuantity());
             put("amount", getAmount());
+            put("uri", routes.productUrl(new ObjectId(prodId)));
         }};
     }
 

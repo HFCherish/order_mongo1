@@ -43,6 +43,13 @@ public class TestHelper {
         return user.placeOrder(orderJsonForTest(product.get_id().toString()));
     }
 
+    public static Map<String, Object> paymentJsonForTest() {
+        return new HashMap<String, Object>() {{
+            put("pay_type", "CASH");
+            put("amount", 5678.0);
+        }};
+    }
+
     public static Map<String, Object> userJsonForTest(String name) {
         return new HashMap<String, Object>() {{
             put("name", name);
