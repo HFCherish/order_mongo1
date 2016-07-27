@@ -9,10 +9,16 @@ import java.util.Map;
 public class OrderItem implements Record {
     private String prodId;
     private int quantity;
+    private double amount;
 
-    public OrderItem(Map info) {
-        this.prodId = info.get("product_id").toString();
-        this.quantity = (int)info.get("quantity");
+    public OrderItem(String prodId, int quantity, double amount) {
+        this.prodId = prodId;
+        this.quantity = quantity;
+        this.amount = amount;
+    }
+
+    public double getAmount() {
+        return amount;
     }
 
     public String getProdId() {
@@ -25,9 +31,10 @@ public class OrderItem implements Record {
 
     @Override
     public Map<String, Object> toRefJson(Routes routes) {
-        return new HashMap(){{
+        return new HashMap() {{
             put("product_id", getProdId());
             put("quantity", getQuantity());
+            put("amount", getAmount());
         }};
     }
 

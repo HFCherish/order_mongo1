@@ -17,7 +17,6 @@ public class User implements Record{
     @Inject
     OrderMapper orderMapper;
 
-    @Inject
     public User(DBObject object) {
         this._id = object.get("_id").toString();
         this.name = object.get("name").toString();
@@ -46,7 +45,7 @@ public class User implements Record{
     }
 
     public Order placeOrder(Map orderInfo) {
-        return orderMapper.save(orderInfo, get_id());
+        return orderMapper. save(orderInfo, get_id());
     }
 
     public Optional<Order> findOrderById(String id) {

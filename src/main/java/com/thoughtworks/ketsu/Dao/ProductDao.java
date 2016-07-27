@@ -29,8 +29,6 @@ public class ProductDao implements ProductMapper {
         prodsCollection.insert(prodDBObject);
         logger.info("Added new product{}", prodToCreate);
 
-//        ObjectId id = (ObjectId) prodDBObject.get("_id");
-//        return findById(id);
         return new Product(prodsCollection.findOne());
     }
 
